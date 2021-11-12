@@ -20,12 +20,13 @@ const Header = () => {
         <li className="nav-item">
           <Link to="/explore" className="nav-link active text-light">Explore More Products</Link>
         </li>
+       { user?.email ?<li className="nav-item">
+          <Link to="/dashboard" className="nav-link active text-light">Dashboard</Link>
+        </li>: []}
         {
-            user?.email ?
-            <li className="nav-item">
+           user?.email ?
             <button onClick={logOut} className="btn btn-light">LogOut 
              </button>
-          </li>
             :
           <li className="nav-item">
             <Link to="/login" className="nav-link active text-light">Login</Link>

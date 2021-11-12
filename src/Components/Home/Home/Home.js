@@ -1,7 +1,7 @@
 import React from 'react';
 import About from '../About/About';
 import Banner from '../Banner/Banner';
-import Reviews from '../Reviews/Reviews';
+import Reviews from '../../Dashboard/Reviews/Reviews';
 import Products from './../Products/Products';
 
 const Home = () => {

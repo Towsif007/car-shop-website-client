@@ -8,7 +8,8 @@ initializeFirebase();
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [authError, setAuthError] = useState('')
+    const [authError, setAuthError] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const auth = getAuth();
 
@@ -22,6 +23,9 @@ const useFirebase = () => {
              
              const newUser = { email, displayName: name };
              setUser(newUser);
+
+            //  save user to database
+            saveUser(email, name, 'POST')
             
              updateProfile(auth.currentUser, {
                  displayName: name
@@ -36,19 +40,7 @@ const useFirebase = () => {
         .finally(() => setIsLoading(false));
     }
 
-    // const updateName = (name)=> {
-    //   updateProfile(auth.currentUser, {
-    //     displayName: name
-    //   }).then(() => {
-    //     const newUser={...user, displayName: name} // recommend
-    //    setUser(newUser)
-        
-    //     // ...
-    //   }).catch((error) => {
-    //     // An error occurred
-    //     // ...
-    //   });
-    // }
+    
 
     const loginUser = (email, password, location, history) => {
       setIsLoading(true)
@@ -77,19 +69,38 @@ const useFirebase = () => {
           return () => unsubscribe;
     }, [])
 
+     useEffect( () =>{
+      fetch(`http://localhost:5000/users/${user.email}`)
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin))
+    }, [user.email])
+
     const logOut = () =>{
       setIsLoading(true)
         signOut(auth).then(() => {
           setUser({})
           })
           .catch((error) => {
-            // An error happened.
+            
           })
           .finally(() => setIsLoading(false));
     }
 
+    const saveUser = (email, displayName, method) => {
+        const user = {email, displayName}
+        fetch('http://localhost:5000/users', {
+          method: method,
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(user)
+        })
+        .then()
+    }
+
     return {
         user,
+        admin,
         authError,
         isLoading,
         registerUser,

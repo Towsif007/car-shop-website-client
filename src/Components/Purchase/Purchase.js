@@ -50,6 +50,7 @@ const Purchase = () => {
             console.log(data)
             if(data.insertedId){
                 alert('Data Inserted successfully')
+                // setPurchase('')
  
             }
         })

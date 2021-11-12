@@ -10,6 +10,8 @@ import Register from './Components/Login/Register/Register';
 import Purchase from './Components/Purchase/Purchase';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import PrivateRoute from './Components/Login/PrivateRoute/PrivateRoute';
+import Dashboard from './Components/Dashboard/Dashboard/Dashboard';
+
 
 function App() {
   return (
@@ -36,8 +38,13 @@ function App() {
       <PrivateRoute path="/purchase/:carId">
       <Purchase></Purchase>
       </PrivateRoute>
+      <PrivateRoute path="/dashboard">
+      <Header></Header>
+      <Dashboard></Dashboard>
+      </PrivateRoute>
       <Route path="*">
       <NotFound></NotFound>
+      <Footer></Footer>
       </Route>
       </Switch>
       <Footer></Footer>
