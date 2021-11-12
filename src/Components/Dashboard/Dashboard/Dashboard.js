@@ -25,6 +25,9 @@ import Payment from '../Payment/Payment';
 import AddProduct from '../AddProduct/AddProduct';
 import Reviews from '../Reviews/Reviews';
 import useAuth from '../../../hooks/useAuth';
+import AdminRoute from './../../Login/AdminRoute/AdminRoute';
+import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
+import ManageProduct from '../ManageProduct/ManageProduct';
 
 
 const drawerWidth = 240;
@@ -79,7 +82,7 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
 
   let {path, url} = useRouteMatch();
-  const {admin, user} = useAuth();
+  const {admin, logOut} = useAuth();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -115,18 +118,24 @@ export default function Dashboard() {
                     <Route exact path={path}>
                     <DashboardHome></DashboardHome>
                     </Route>
-                    <Route path={`${path}/makeadmin`}>
+                    <AdminRoute path={`${path}/makeadmin`}>
                         <MakeAdmin></MakeAdmin>
-                    </Route>
+                    </AdminRoute>
                     <Route path={`${path}/payment`}>
                         <Payment></Payment>
-                    </Route>
+                    </Route>                   
                     <Route path={`${path}/reviews`}>
                         <Reviews></Reviews>
                     </Route>
-                    <Route path={`${path}/addproduct`}>
+                    <AdminRoute path={`${path}/addproduct`}>
                         <AddProduct></AddProduct>
-                    </Route>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageallorder`}>
+                        <ManageAllOrders></ManageAllOrders>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageproduct`}>
+                        <ManageProduct></ManageProduct>
+                    </AdminRoute>
                 </Switch>
         
       </Main>
@@ -150,26 +159,27 @@ export default function Dashboard() {
         <Divider />
        
        
-        <List>
-        
-    {!admin && <box>
-    
+        <List> 
+    {!admin && <Box>    
+    <Button onClick={logOut} variant="contained">LogOut</Button> <br /> <br />
     <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/payment`}>Payment</NavLink></Button> <br /> <br />
-    <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}`}>Dashboard</NavLink></Button> <br /> <br />
+    <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}`}>My Order</NavLink></Button> <br /> <br />
     <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/reviews`}>Give Review</NavLink></Button> <br /> <br />
-    </box>}
+    </Box>}
     
-        {admin && <box>
+        {admin && <Box>
+
+            <Button onClick={logOut} variant="contained">LogOut</Button> <br /> <br />
             <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/makeadmin`}>Make Admin</NavLink></Button> <br /> <br />
-        
+            <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/manageallorder`}>Manage All Orders</NavLink></Button> <br /> <br />
+            <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/manageproduct`}>Manage Product</NavLink></Button> <br /> <br />       
             <Button sx={{ width: 150}} variant="outlined"> <NavLink style={{textDecoration: 'none'}}to={`${url}/addproduct`}>Add A Product </NavLink></Button>
-        </box> }
+        </Box> }
         </List>
       </Drawer>
     </Box>
   );
 }
-
 
 
 

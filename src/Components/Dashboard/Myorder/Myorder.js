@@ -20,6 +20,25 @@ const Myorder = () => {
         .then(data => setMyorder(data))
     }, [])
 
+    const handleDelete = id => {
+        const url = `http://localhost:5000/purchase/${id}`
+        fetch(url, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            if(data.deletedCount){
+                alert('Item has deleted')
+                const remaining = myorder.filter(row => row._id !== id)
+            setMyorder(remaining)
+            }
+            
+        })
+
+
+    }
+
     return (
         <div>
             <h1>My Orders: {myorder.length} </h1>
@@ -39,7 +58,7 @@ const Myorder = () => {
           {myorder.map((row) => (
             <TableRow
               key={row._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
             >
               <TableCell component="th" scope="row">
                 {row.customerName}
@@ -47,7 +66,7 @@ const Myorder = () => {
               <TableCell align="right">{row.carId}</TableCell>
               <TableCell align="right">{row.carname}</TableCell>
               <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.address}</TableCell>   <Button variant="contained">Cancel</Button>
+              <TableCell align="right">{row.address}</TableCell>   <Button onClick={() => handleDelete(row._id)} variant="contained">Cancel</Button>
             </TableRow> 
           ))}
         </TableBody>
