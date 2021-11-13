@@ -5,7 +5,7 @@ import './ExploreProducts.css'
 const ExploreProducts = () => {
     const [exploreproduct, setexploreproduct] = useState([])
     useEffect(()=> {
-        fetch('http://localhost:5000/explores')
+        fetch('https://immense-badlands-19935.herokuapp.com/explores')
         .then(res => res.json())
         .then(data => setexploreproduct(data))
     }, [])

@@ -5,7 +5,7 @@ import './Products.css'
 const Products = () => {
     const [products, setProducts] = useState([])
      
-    const url= 'http://localhost:5000/explores'
+    const url= 'https://immense-badlands-19935.herokuapp.com/explores'
      const someProducts =  products.slice(1,7)
     useEffect(()=> {  
         fetch(url)

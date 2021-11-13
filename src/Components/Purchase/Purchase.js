@@ -13,7 +13,7 @@ const Purchase = () => {
     
 
     useEffect(() =>{
-        fetch(`http://localhost:5000/explores/${carId}`)
+        fetch(`https://immense-badlands-19935.herokuapp.com/explores/${carId}`)
         .then(res => res.json())
         .then(data => setCar(data))
     }, []);
@@ -38,7 +38,7 @@ const Purchase = () => {
         }
         // send to the server
         console.log(carPurchase);
-        fetch('http://localhost:5000/purchase', {
+        fetch('https://immense-badlands-19935.herokuapp.com/purchase', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

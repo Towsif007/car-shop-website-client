@@ -14,14 +14,14 @@ const Myorder = () => {
     const [myorder, setMyorder] = useState([])
 
     useEffect(() =>{
-        const url = `http://localhost:5000/purchase?email=${user.email}`
+        const url = `https://immense-badlands-19935.herokuapp.com/purchase?email=${user.email}`
         fetch(url)
         .then(res => res.json())
         .then(data => setMyorder(data))
     }, [])
 
     const handleDelete = id => {
-        const url = `http://localhost:5000/purchase/${id}`
+        const url = `https://immense-badlands-19935.herokuapp.com/purchase/${id}`
         fetch(url, {
             method: 'DELETE'
         })

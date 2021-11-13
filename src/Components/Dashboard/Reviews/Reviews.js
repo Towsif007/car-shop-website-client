@@ -8,7 +8,7 @@ const Reviews = () => {
     const onSubmit = data => {
         console.log(data);
 
-        axios.post('http://localhost:5000/addreviews', data)
+        axios.post('https://immense-badlands-19935.herokuapp.com/addreviews', data)
         .then(res => {
           if(res.data.insertedId){
               console.log(res)
@@ -17,15 +17,12 @@ const Reviews = () => {
           }
         })
     }
-
-
-
     return (
         <div className="reviews">
             <h1>This is reviews</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("name")} placeholder="User Name :" />
-      <input {...register("name")} placeholder="Product Name :" />
+      <textarea {...register("username")} placeholder="User Name :" />
+      <textarea {...register("name")} placeholder="Product Name :" />
       <textarea {...register("description")} placeholder="Description :" />
       <input type="number" {...register("review", { min: 1, max: 5 })} placeholder="Your Review:" />
       <input className="btn btn-primary" type="submit" />
