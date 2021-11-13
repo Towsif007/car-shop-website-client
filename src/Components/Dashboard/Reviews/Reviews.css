@@ -1,0 +1,14 @@
+ .reviews form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 300px;
+    
+}
+
+.reviews form input, textarea{
+    width: 60%;
+    padding:10px;
+    margin-bottom: 10px;
+}
