@@ -24,7 +24,7 @@ const Reviews = () => {
       <textarea {...register("username")} placeholder="User Name :" />
       <textarea {...register("name")} placeholder="Product Name :" />
       <textarea {...register("description")} placeholder="Description :" />
-      <input type="number" {...register("review", { min: 1, max: 5 })} placeholder="Your Review:" />
+      <input type="number" {...register("review", { min: 1, max: 5 })} placeholder="Your Review: (out of 5)" />
       <input className="btn btn-primary" type="submit" />
     </form>
          
